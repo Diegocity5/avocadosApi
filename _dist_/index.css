@@ -1,0 +1,53 @@
+@import "../_snowpack/pkg/tailwindcss/dist/base.css";
+@import "../_snowpack/pkg/tailwindcss/dist/components.css";
+@import "../_snowpack/pkg/tailwindcss/dist/utilities.css";
+
+#app {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 30px;
+}
+#app article {
+  display: grid;
+  grid-template-areas:
+    "img title title"
+    "img price price";
+  max-height: 150px;
+  background-color: #005100;
+  padding: 5px;
+  border-radius: 10px;
+  transition: background-color 200ms linear;
+}
+#app article:hover {
+  background-color: #067d06;
+  cursor: pointer;
+}
+article > img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  grid-area: img;
+}
+article h2 {
+  color: white;
+  line-height: 1.5rem;
+  font-weight: bold;
+  grid-area: title;
+}
+article div {
+  color: #81bc81;
+  font-weight: bold;
+  grid-area: price;
+}
+/* breakpoints */
+@media screen and (min-width: 530px) {
+  #app {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 740px) {
+  #app {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
