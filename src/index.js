@@ -1,15 +1,19 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Consumiendo APIS es Genial ya que hay cientos de  Apis
- *!
- **/
 const baseUrl = "https://platzi-avo.vercel.app";
-// const url = "https://platzi-avo.vercel.app/api/avo";
 const nodeApp = document.querySelector('#app');
+
+//Intl API internacionalización del browser
+//Dar formato a monedas
+const formatPrice = (price) => {
+  const newPrice = new window.Intl.NumberFormat('en-US', {
+    style: "currency",
+    currency: "USD",
+  }).format(price)
+
+  return newPrice;
+};
 
 //Web API
 //Conectarnos al server
-// Trabajando con PROMISE
 window.fetch(`${baseUrl}/api/avo`)
   //Procesar la respuesta, y convertirla en JSON
   .then((respuesta) => respuesta.json())
@@ -17,24 +21,20 @@ window.fetch(`${baseUrl}/api/avo`)
   .then((responseJson) => {
     const allArticles = [];
     responseJson.data.forEach(item => {
-        //crear un imagen
+        //Create an image
         const img = document.createElement('img');
         img.src = `${baseUrl}${item.image}`;
-        //crear un titulo
+        //Create a title
         const title = document.createElement('h2');
         title.innerText = item.name;
-        //crear un precio
+        //Create a price
         const price = document.createElement('div');
-        price.innerText = item.price;
-        //card container
+        price.innerText = formatPrice(item.price);
+        //Card container
         const card = document.createElement('article');
         card.append(img, title, price);
-        //Agregar al array javascript memoria
+
         allArticles.push(card);
     })
     nodeApp.append(...allArticles);
 });
-
-//Tarea: pudes logra este codigo tambien con asyn/await
-
-//Lo que hicimos en esta clase no es nada mas que conectarnos a una Api
